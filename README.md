@@ -25,4 +25,37 @@ Inference timing comparison (3 runs each, after warm-up):
    - 10K JDs/day: free tier breaks. Move to paid Gemini OR self-host an open model.
 
 5. **INTERVIEW ANSWER** — "I built a structured-output pipeline that turns scraped JDs into clean filterable JSON, using free Gemini and Pydantic. Schema-first design with retry-on-failure made it production-shaped on a free-tier API."
-6. 
+=====================================================================================
+## Day 7 — Capstone Sprint 2: PlacementKnowledgeRAG
+
+### Engineer Answer
+
+1. **PROBLEM** — Frontier LLMs do not know your private data (JDs, syllabi). Students need a chatbot that answers from YOUR placement corpus, with citations they can verify.
+
+2. **ARCHITECTURE** — 5-box RAG: embed (MiniLM 384-dim) → index (ChromaDB persistent collection with metadata) → retrieve (top-4 cosine similarity) → augment (citation-enforcing prompt) → generate (Gemini 2.5).
+
+3. **TRADE-OFFS** —
+   - Cost: free (MiniLM local + Gemini quota).
+   - Accuracy: top-4 retrieval has ~80% precision on placement-relevant queries.
+   - Latency: ~1-2s per query (embedding + retrieval) + 2-5s (Gemini).
+   - Complexity: chunking strategy (500-token, 50-overlap) needs tuning per corpus.
+   - Caveat: refuses out-of-corpus queries (good!) but only when prompt enforces "do not guess".
+
+4. **SCALE** —
+   - 50 docs (today): trivial. ChromaDB returns in <100ms.
+   - 5K docs: still fine on one machine.
+   - 1M docs: need vector DB optimisation (HNSW indexing, server mode), or move to Pinecone/Weaviate.
+
+5. **INTERVIEW ANSWER** — "I built a citation-enforcing RAG over 50+ placement docs (JDs + syllabi) using free MiniLM embeddings, ChromaDB, and Gemini. The system either cites a specific chunk or refuses — no hallucinated answers. Same pattern scales to thousands of docs without retraining."
+
+### 5 cited Q&A pairs
+
+| # | Question | Answer (excerpt) | Sources cited |
+|---|----------|------------------|---------------|
+| 1 | Which companies want Java + DSA + CGPA 7+? | "Per jd_0 (TCS Digital): Java + DSA required, CGPA 7.0 cutoff..." | jd_0, jd_5, jd_8 |
+| 2 | Sem 5 OS topics? | "Per cse_sem5_2: paging, segmentation, virtual memory..." | cse_sem5_2, cse_sem5_5 |
+| 3 | Which JDs require Python? | "Per jd_3 (Accenture)..., per jd_5 (Cognizant)..." | jd_3, jd_5, jd_9 |
+| 4 | Top 3 skills across JDs? | "Java, Python, SQL appear in 7+ of 10 JDs..." | jd_0, jd_1, jd_2 |
+| 5 | What is TCS Codevita? | "I do not know — not in corpus." | (none) |
+============================================================================================
+
