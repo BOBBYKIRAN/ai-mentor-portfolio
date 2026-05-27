@@ -79,6 +79,11 @@ This is the ReAct loop. Every agent we build follows this pattern.
 1. The trace IS the explanation. Print every step.
 2. The doc-string IS the prompt. Bad doc-string = bad tool selection.
 3. Real agents handle tool failures gracefully — define failure modes in the doc-string.
+- ✅ Hello-LangGraph agent runs end-to-end
+- ✅ 4-message trace printed on live-fact question
+- ✅ 1 failure case captured + behaviour documented
+- ✅ "Trace as a story" markdown cell in notebook
+- ✅ Pushed to repo
 ==============================================================================================
 
 
