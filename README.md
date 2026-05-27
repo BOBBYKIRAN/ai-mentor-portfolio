@@ -58,4 +58,27 @@ Inference timing comparison (3 runs each, after warm-up):
 | 4 | Top 3 skills across JDs? | "Java, Python, SQL appear in 7+ of 10 JDs..." | jd_0, jd_1, jd_2 |
 | 5 | What is TCS Codevita? | "I do not know — not in corpus." | (none) |
 ============================================================================================
+## Day 9 Lab 9A — Trace as a story
+
+1. **Human asked:** "What is TCS's 2026 hiring quota?"
+2. **Agent thought:** "I don't know recent figures. I should search."
+3. **Agent acted:** called `web_search('TCS 2026 hiring quota')`.
+4. **Agent observed:** got back search results mentioning 40-50K range.
+5. **Agent answered:** synthesised "Based on search results, TCS plans to hire 40-50K freshers..."
+
+This is the ReAct loop. Every agent we build follows this pattern.
+-------------------------------------------------------------------
+## Day 9 Lab 9A — Hello-LangGraph
+
+- 1-tool ReAct agent with DuckDuckGo web_search
+- 4-message trace on a live-fact question (TCS 2026 hiring)
+- Failure case: bad URL → agent reported "could not find" / agent hallucinated [pick one]
+
+### Reflection (3 lines)
+
+1. The trace IS the explanation. Print every step.
+2. The doc-string IS the prompt. Bad doc-string = bad tool selection.
+3. Real agents handle tool failures gracefully — define failure modes in the doc-string.
+==============================================================================================
+
 
