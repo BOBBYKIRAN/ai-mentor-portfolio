@@ -1,5 +1,5 @@
 # ai-mentor-portfolio
-AI Mentor Bootcamp — <Bobbykiran Madiki>
+AI Mentor Bootcamp — Bobbykiran Madiki
 ## Day 1 — Setup complete
 
 - ✅ Google AI Studio API key provisioned
