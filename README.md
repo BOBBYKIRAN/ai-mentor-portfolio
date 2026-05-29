@@ -125,5 +125,27 @@ This is the safe behaviour. If the agent had hallucinated, the fix would be to t
 5. **INTERVIEW ANSWER** — "I built a 3-tool LangGraph agent that takes a student profile and produces tailored placement prep — JD analysis, skill gap, answer scoring. Each tool is a plain function; the agent picks which to call. Failure recovery is built into tool contracts."
 ```
 ========================================================================================
+## Day 10 Lab 10A — Hello-CrewAI
+
+### Goal
+Built a 2-agent CrewAI system that generates a 1-page TCS Digital placement preparation brief.
+
+### Agents
+1. **Placement Researcher** — prepares factual placement notes.
+2. **Placement Brief Writer** — converts notes into a student-friendly markdown brief.
+
+### Workflow
+Researcher → Writer → Final Markdown Brief
+
+### Files Generated
+- `day10_lab10a_transcript.txt`
+- `tcs_digital_brief.md`
+
+### Reflection
+1. The handoff between agents is the design quality.
+2. `expected_output` is the contract between agents.
+3. Verbose mode helps debug multi-agent workflows.
+==========================================================================================
+
 
 
