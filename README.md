@@ -1,5 +1,100 @@
 # ai-mentor-portfolio
 AI Mentor Bootcamp — <Bobbykiran Madiki>
+## Day 1 — Setup complete
+
+- ✅ Google AI Studio API key provisioned
+- ✅ Groq API key provisioned
+- ✅ Hello-Gemini call working — see [Day1_Setup.ipynb](Day1_Setup.ipynb)
+- 4-tool comparison matrix from Lab 1A: see screenshot below
+
+![Gemini first call](gemini_first_call.png)
+```
+===================================================================================================
+## Day 2 Lab 2B — Errors handled
+
+1. **Markdown fence wrapping** (`\`\`\`json ... \`\`\``)
+   The retry prompt asks Gemini to output raw JSON without fences. Triggers on ~5-10% of calls.
+
+2. **Hallucinated phone number when source has none**
+   `Optional[str] = None` in Pydantic — model returns `null`, schema validates.
+
+3. **Empty / whitespace-only input**
+   Pydantic raises ValidationError with "Field required". Caller catches.
+
+## Sample résumés processed: 3 / 3 successful
+===================================================================================================
+## Day 3 Lab 3A — Verification Chain
+
+### Verification Matrix
+
+| # | Claim | AI Source | Perplexity Check | Primary Source URL | Verdict |
+|---|-------|-----------|------------------|--------------------|---------|
+| 1 | Average B.Tech placement package in 2025 was ₹6.2 LPA | NASSCOM | [paste URL] | [paste URL] | PARTIAL |
+| 2 | 78% of Tier-1 students got at least one offer in 2025 | AICTE Annual Report | [paste URL] | [paste URL] | FALSE |
+| 3 | TCS hired ~40,000 freshers in 2025 | TCS Annual Report | [paste URL] | [paste URL] | VERIFIED |
+| 4 | IT sector accounted for 56% of engineering placements | NASSCOM | [paste URL] | [paste URL] | NO PRIMARY SOURCE FOUND |
+| 5 | Median IIT placement package in 2025 was ₹18.5 LPA | India Skills Report | [paste URL] | [paste URL] | PARTIAL |
+
+### Reflection
+
+The claim that looked most authoritative but was actually weakest was claim #__:
+'___'. Gemini cited [source] confidently, and Perplexity initially confirmed it.
+But when I opened the primary URL, I found that the actual number / year /
+framing was different. The lesson: confidence does not equal correctness. The
+verification step belongs to the human — every time.
+=======================================================================================================================================
+ # Day 4 — Productivity sprint
+
+**Company:** TCS
+**Time:** 45 minutes (timeboxed)
+
+### Edit notes (3 lines)
+
+1. Gamma confabulated a "hiring 50,000 freshers in 2025" stat on slide 6. Source said 40,000. Edited.
+2. Slide 4 listed "Kubernetes" as a required skill — actually nice-to-have per the JD. Edited.
+3. Slide 1 (cover) — replaced Gamma's generic "Your Career Awaits" with a company-specific line.
+
+ Day 4 — n8n Daily News Digest
+
+- ✅ Self-hosted n8n via Docker
+- ✅ Workflow: Schedule (7AM IST) → RSS → Gemini summariser → Gmail
+- ✅ Workflow JSON committed: [Day4_NewsDigest.json](Day4_NewsDigest.json)
+- ✅ Test email screenshot below
+
+![Test email screenshot](daily_digest_test_email.png)
+
+===================================================================================================================================
+# Day 5 — Résumé Scorer Streamlit
+
+**Live URL:** https://your-app-name.streamlit.app
+**Code:** [app.py](app.py)
+**Acceptance Log:** [acceptance_log.md](acceptance_log.md)
+
+## Tools Used
+
+- Continue.dev
+- Gemini 2.5 Flash
+- Streamlit
+- GitHub
+- Streamlit Community Cloud
+
+## Features
+
+- Résumé vs JD fit score
+- Rationale
+- Missing skills
+- Suggestions
+- 4-axis score breakdown chart
+- Free learning resources for missing skills
+
+## Reflection
+
+- This is an AI-assisted prototype.
+- To productionise, I would add better error handling, caching, rate limits,
+  and authentication.
+- Continue.dev helped scaffold the UI quickly, but manual review was needed
+  for prompt correctness and deployment fixes.
+
 Day 5B_Task:
 Inference timing comparison (3 runs each, after warm-up):
   API:   min 0.25s | avg 0.31s
